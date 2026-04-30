@@ -4,7 +4,6 @@ import { captureError, init, log } from "@scanfix/browser";
 
 type ScanfixLevel = "INFO" | "WARN" | "ERROR";
 
-const FALLBACK_SCANFIX_API_KEY = "sf_98423c2fd2fa5b0a7fa4ff017dce73e004b2a3601a1836cb";
 const SCANFIX_PROXY_API_URL = "/api/scanfix";
 
 const INIT_KEY = "__scanfix_initialized__";
@@ -76,8 +75,7 @@ export function initScanfix() {
   if (typeof window === "undefined") return;
   if ((window as Window & { [INIT_KEY]?: boolean })[INIT_KEY]) return;
 
-  const apiKey =
-    process.env.NEXT_PUBLIC_SCANFIX_API_KEY ?? FALLBACK_SCANFIX_API_KEY;
+  const apiKey = process.env.NEXT_PUBLIC_SCANFIX_API_KEY;
 
   init({
     apiKey,
