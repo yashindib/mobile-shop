@@ -5,6 +5,7 @@
 import { useState, useEffect } from "react";
 import { Product } from "@/types";
 import { fetchProducts } from "@/lib/api";
+import { reportApiFailure } from "@/lib/scanfix";
 
 export function useProducts(category?: string) {
   const [products, setProducts] = useState<Product[]>([]);
@@ -26,6 +27,7 @@ export function useProducts(category?: string) {
       })
       .catch((err) => {
         console.error("[useProducts] fetch error:", err);
+        reportApiFailure("fetchProducts", undefined, err);
         setError(err.message);
         setLoading(false);
       });
@@ -49,6 +51,7 @@ export function useProduct(id: string) {
         })
         .catch((err) => {
           console.error("[useProduct] error:", err);
+          reportApiFailure(`fetchProductById:${id}`, undefined, err);
           setError(err.message);
           setLoading(false);
         });

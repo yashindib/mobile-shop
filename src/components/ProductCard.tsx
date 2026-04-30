@@ -57,6 +57,7 @@ export default function ProductCard({ product }: Props) {
           {/* BUG #2: Stars rendered without key prop */}
           {[1, 2, 3, 4, 5].map((star) => (
             <svg
+              key={star}
               className={`w-4 h-4 ${
                 star <= Math.round(product.rating)
                   ? "text-amber-400"
